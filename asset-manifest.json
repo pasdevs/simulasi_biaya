@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/simulasi_biaya/static/css/main.582636ed.css",
+    "main.js": "/simulasi_biaya/static/js/main.ae31dd53.js",
+    "static/js/787.cda612ba.chunk.js": "/simulasi_biaya/static/js/787.cda612ba.chunk.js",
+    "index.html": "/simulasi_biaya/index.html",
+    "main.582636ed.css.map": "/simulasi_biaya/static/css/main.582636ed.css.map",
+    "main.ae31dd53.js.map": "/simulasi_biaya/static/js/main.ae31dd53.js.map",
+    "787.cda612ba.chunk.js.map": "/simulasi_biaya/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.582636ed.css",
+    "static/js/main.ae31dd53.js"
+  ]
+}
