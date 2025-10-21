@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { Check, Calculator, ArrowRight, PhoneCall, ShieldCheck, HelpCircle, CheckCircle } from "lucide-react";
 import "../App.css";
 
 const CS_WHATSAPP = "62811960193";
@@ -71,7 +72,7 @@ export function computeFees(base, { path, scholarPct, dp, tenor, includeUniform,
   return { spp: _spp, ug: _ug, uniform, reg, bea, sppAfterBea, ugAfterDp, monthly, firstPay: Math.max(0, dp), totalYear: sppAfterBea * 2 + _ug + uniform + reg };
 }
 
-function PaymentSimulatorLandingBootstrap() {
+export default function PaymentSimulatorBootstrapIcons() {
   const [faculty, setFaculty] = useState(FACULTIES_FALLBACK[0].id);
   const [program, setProgram] = useState(FACULTIES_FALLBACK[0].programs[0]);
   const [path, setPath] = useState(JALUR[0].id);
@@ -102,9 +103,9 @@ function PaymentSimulatorLandingBootstrap() {
             </div>
           </div>
           <div className="d-none d-md-flex align-items-center gap-2">
-            <span className="badge bg-secondary">Terakreditasi</span>
+            <span className="badge bg-secondary d-flex align-items-center gap-1"><ShieldCheck size={14} /> Terakreditasi</span>
             <button className="btn" style={{ background:"#f59e0b", color:"#fff" }} onClick={() => document.getElementById("simulator")?.scrollIntoView({behavior:"smooth"})}>
-              Simulasikan Biaya
+              Simulasikan Biaya <Calculator size={16} style={{ marginLeft:8 }} />
             </button>
           </div>
         </div>
@@ -119,12 +120,12 @@ function PaymentSimulatorLandingBootstrap() {
               </motion.h1>
               <p className="mt-3 text-muted">Simulasikan sendiri biaya kuliahmu sesuai jurusan dan jalur masuk. Dapatkan estimasi cicilan, uang pangkal, dan total tahun pertama.</p>
               <div className="mt-4 d-flex gap-2">
-                <button className="btn" style={{ background:"#f59e0b", color:"#fff" }} onClick={() => document.getElementById("simulator")?.scrollIntoView({behavior:"smooth"})}>Mulai Simulasi</button>
+                <button className="btn" style={{ background:"#f59e0b", color:"#fff" }} onClick={() => document.getElementById("simulator")?.scrollIntoView({behavior:"smooth"})}>Mulai Simulasi <ArrowRight size={14} style={{ marginLeft:8 }} /></button>
                 <button className="btn btn-outline-secondary" onClick={() => document.getElementById("akreditasi")?.scrollIntoView({behavior:"smooth"})}>Lihat Akreditasi</button>
               </div>
               <div className="mt-3 d-flex flex-wrap gap-3 small text-muted">
-                <div className="d-flex gap-2 align-items-center"><span style={{ color:"#10b981" }}>✔</span> Transparansi biaya</div>
-                <div className="d-flex gap-2 align-items-center"><span style={{ color:"#10b981" }}>✔</span> CS responsif via WhatsApp</div>
+                <div className="d-flex gap-2 align-items-center"><Check size={14} color="#10b981" /> Transparansi biaya</div>
+                <div className="d-flex gap-2 align-items-center"><Check size={14} color="#10b981" /> CS responsif via WhatsApp</div>
               </div>
             </div>
 
@@ -134,19 +135,19 @@ function PaymentSimulatorLandingBootstrap() {
                   <h5 style={{ fontWeight:700 }}>Quick Look – Estimasimu</h5>
                   <div className="row g-3 mt-3">
                     <div className="col-6">
-                      <div className="p-3 rounded-3" style={{ background:"#eef2ff" }}>
+                      <div className="p-3 rounded-3 card-indigo">
                         <div className="small text-muted">Cicilan per bulan</div>
                         <div style={{ fontWeight:800, color:"#4338ca" }}>{formatIDR(fees.monthly)}</div>
                       </div>
                     </div>
                     <div className="col-6">
-                      <div className="p-3 rounded-3" style={{ background:"#ecfdf5" }}>
+                      <div className="p-3 rounded-3 card-emerald">
                         <div className="small text-muted">DP (uang muka)</div>
                         <div style={{ fontWeight:800, color:"#059669" }}>{formatIDR(fees.firstPay)}</div>
                       </div>
                     </div>
                     <div className="col-12">
-                      <div className="p-3 rounded-3" style={{ background:"#fff7ed" }}>
+                      <div className="p-3 rounded-3" style={{ background:"#fff7ed", border:"1px solid #fcd34d" }}>
                         <div className="small text-muted">Perkiraan total tahun pertama</div>
                         <div style={{ fontWeight:800, color:"#b45309" }}>{formatIDR(fees.totalYear)}</div>
                       </div>
@@ -168,6 +169,7 @@ function PaymentSimulatorLandingBootstrap() {
           <div className="card shadow-sm rounded-3">
             <div className="card-body">
               <h4 style={{ fontWeight:700, marginBottom:20 }}>Simulasi Pembayaran</h4>
+
               <div className="row g-4">
                 <div className="col-md-4">
                   <label className="form-label">Fakultas</label>
@@ -175,12 +177,14 @@ function PaymentSimulatorLandingBootstrap() {
                     {FACULTIES_FALLBACK.map(f=> <option key={f.id} value={f.id}>{f.name}</option>)}
                   </select>
                 </div>
+
                 <div className="col-md-4">
                   <label className="form-label">Program Studi</label>
                   <select className="form-select" value={program} onChange={(e)=>setProgram(e.target.value)}>
                     {(FACULTIES_FALLBACK.find(f=>f.id===faculty)?.programs ?? []).map(p=> <option key={p} value={p}>{p}</option>)}
                   </select>
                 </div>
+
                 <div className="col-md-4">
                   <label className="form-label">Jalur</label>
                   <select className="form-select" value={path} onChange={(e)=>setPath(e.target.value)}>
@@ -191,13 +195,12 @@ function PaymentSimulatorLandingBootstrap() {
 
               <div className="row g-3 mt-3">
                 <div className="col-md-6">
-                  <div>
-                    <label className="form-label">Tenor Cicilan (bulan)</label>
-                    <div className="d-flex flex-wrap gap-2">
-                      {CICILAN.map(opt=> <button key={opt.id} className={`btn ${tenor===opt.id ? "btn-primary" : "btn-outline-primary"}`} onClick={()=>setTenor(opt.id)}>{opt.label}</button>)}
-                    </div>
+                  <label className="form-label">Tenor Cicilan (bulan)</label>
+                  <div className="d-flex flex-wrap gap-2">
+                    {CICILAN.map(opt=> <button key={opt.id} type="button" className={`btn ${tenor===opt.id ? "btn-primary" : "btn-outline-primary"}`} onClick={()=>setTenor(opt.id)}>{opt.label}</button>)}
                   </div>
                 </div>
+
                 <div className="col-md-6">
                   <label className="form-label">Beasiswa (persentase SPP)</label>
                   <input type="range" min="0" max="50" step="5" value={scholar} onChange={(e)=>setScholar(parseInt(e.target.value))} className="form-range"/>
@@ -211,6 +214,7 @@ function PaymentSimulatorLandingBootstrap() {
                   <input type="number" className="form-control" value={dp} onChange={(e)=>setDp(parseInt(e.target.value||"0"))}/>
                   <div className="small text-muted">DP lebih besar → cicilan lebih ringan.</div>
                 </div>
+
                 <div className="col-md-6">
                   <label className="form-label">Biaya Tambahan</label>
                   <div className="d-flex flex-column gap-2">
@@ -237,12 +241,14 @@ function PaymentSimulatorLandingBootstrap() {
                     <div style={{ fontWeight:800 }}>{formatIDR(fees.spp)}</div>
                   </div>
                 </div>
+
                 <div className="col-md-4">
                   <div className="p-3 border rounded-3">
                     <div className="small text-muted">Uang Gedung</div>
                     <div style={{ fontWeight:800 }}>{formatIDR(fees.ug)}</div>
                   </div>
                 </div>
+
                 <div className="col-md-4">
                   <div className="p-3 border rounded-3">
                     <div className="small text-muted">Potongan Beasiswa</div>
@@ -256,12 +262,14 @@ function PaymentSimulatorLandingBootstrap() {
                     <div style={{ fontWeight:800 }}>{formatIDR(fees.ugAfterDp)}</div>
                   </div>
                 </div>
+
                 <div className="col-md-4">
-                  <div className="p-3 border rounded-3" style={{ background:"#eef2ff" }}>
+                  <div className="p-3 border rounded-3 card-indigo">
                     <div className="small text-muted">Cicilan/bulan</div>
                     <div style={{ fontWeight:800, color:"#4338ca" }}>{formatIDR(fees.monthly)}</div>
                   </div>
                 </div>
+
                 <div className="col-md-4">
                   <div className="p-3 border rounded-3" style={{ background:"#fff7ed" }}>
                     <div className="small text-muted">Total Tahun Pertama (perkiraan)</div>
@@ -275,10 +283,10 @@ function PaymentSimulatorLandingBootstrap() {
                   <button className="btn w-100" style={{ background:"#f59e0b", color:"#fff" }}>Lanjut Daftar Sekarang</button>
                 </div>
                 <div className="col-md-4">
-                  <button className="btn btn-outline-secondary w-100" onClick={()=>document.getElementById("lead")?.scrollIntoView({behavior:"smooth"})}>Konsultasi dengan CS</button>
+                  <button className="btn btn-outline-secondary w-100" onClick={()=>document.getElementById("lead")?.scrollIntoView({behavior:"smooth"})}>Konsultasi dengan CS <PhoneCall size={14} style={{ marginLeft:8 }} /></button>
                 </div>
                 <div className="col-md-4">
-                  <a className="btn btn-light w-100" href="#faq">Lihat FAQ</a>
+                  <a className="btn btn-light w-100" href="#faq">Lihat FAQ <HelpCircle size={14} style={{ marginLeft:8 }} /></a>
                 </div>
               </div>
 
@@ -304,7 +312,7 @@ function PaymentSimulatorLandingBootstrap() {
                   <div className="card shadow-sm rounded-3">
                     <div className="card-body text-center">
                       <div style={{ fontWeight:700, color:"#059669" }}>{p.name}</div>
-                      <span className={`badge ${p.acc==="Unggul" ? "bg-success" : "bg-warning text-dark"}`}>Akreditasi {p.acc}</span>
+                      <span className={`badge ${p.acc==="Unggul" ? "bg-success" : "bg-warning text-dark"}`} style={{ marginTop:8, display:"inline-block" }}>Akreditasi {p.acc}</span>
                     </div>
                   </div>
                 </div>
@@ -358,18 +366,20 @@ function PaymentSimulatorLandingBootstrap() {
                 </div>
               </div>
             </div>
+
             <div className="col-md-6">
               <div className="card rounded-3 shadow-sm">
                 <div className="card-body">
                   <h5>Butuh bantuan sekarang?</h5>
                   <p className="text-muted">Tim kami siap bantu hitungkan opsi terbaik.</p>
-                  <div className="d-grid gap-2 d-md-flex">
+                  <div className="d-flex gap-2">
                     <a className="btn" style={{ background:"#059669", color:"#fff" }} href={`https://wa.me/${CS_WHATSAPP}`} target="_blank" rel="noreferrer">Chat WhatsApp</a>
                     <button className="btn btn-outline-secondary">Jadwalkan Panggilan</button>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -402,5 +412,3 @@ function PaymentSimulatorLandingBootstrap() {
     </div>
   );
 }
-
-export default PaymentSimulatorLandingBootstrap;

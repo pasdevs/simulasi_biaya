@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import { Check, Calculator, ArrowRight, PhoneCall, ShieldCheck, HelpCircle, CheckCircle } from "lucide-react";
 import "../App.css";
 
@@ -72,7 +72,131 @@ export function computeFees(base, { path, scholarPct, dp, tenor, includeUniform,
   return { spp: _spp, ug: _ug, uniform, reg, bea, sppAfterBea, ugAfterDp, monthly, firstPay: Math.max(0, dp), totalYear: sppAfterBea * 2 + _ug + uniform + reg };
 }
 
-export default function PaymentSimulatorBootstrapIcons() {
+function ToggleOption({ label, checked, onChange }) {
+  return (
+    <div className="d-flex justify-content-between align-items-center border rounded-3 p-2">
+      <div>{label}</div>
+      <div className="form-check form-switch">
+        <input className="form-check-input" type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} />
+      </div>
+    </div>
+  );
+}
+
+// function SummaryTile({ label, value, highlight }) {
+//   const className = highlight === "indigo" ? "card-indigo p-3 rounded-3" : highlight === "amber" ? "p-3 rounded-3" : "p-3 rounded-3";
+//   const style = highlight === "indigo" ? {} : highlight === "amber" ? { background: "#fff7ed", border: "1px solid #fcd34d" } : {};
+//   return (
+//     <div className={className} style={style}>
+//       <div className="small text-muted">{label}</div>
+//       <div style={{ fontWeight: 800 }}>{formatIDR(value)}</div>
+//     </div>
+//   );
+// }
+
+function SummaryTile({ label, value, highlight }) {
+  let style = { 
+    background: "#ffffff", 
+    border: "1px solid #e5e7eb", 
+    borderRadius: "0.75rem", 
+    padding: "1rem" ,
+    color: "#000000ff"
+  };
+
+  if (highlight === "indigo") {
+    style.background = "#eef2ff";
+    style.border = "1px solid #c7d2fe";
+    style.color = "#4f46e5";
+  } else if (highlight === "amber") {
+    style.background = "#fff7ed";
+    style.border = "1px solid #fcd34d";
+    style.color = "#b45309";
+  } else if (highlight === "green") {
+    style.background = "#ecfdf5";
+    style.border = "1px solid #a7f3d0";
+    style.color = "#059669";
+  }
+
+
+  return (
+    <div style={style}>
+      <div className="small text-muted">{label}</div>
+      <div style={{ fontWeight: 800 }}>{formatIDR(value)}</div>
+    </div>
+  );
+}
+
+function AccreditationPanel() {
+  const data = [
+    { faculty: "Fakultas Teknik", programs: [
+      { name: "Teknik Industri", acc: "Unggul" },
+      { name: "Teknik Mesin", acc: "Baik Sekali" },
+      { name: "Teknik Informatika", acc: "Unggul" },
+      { name: "Teknik Lingkungan", acc: "Baik Sekali" },
+      { name: "Teknologi Pangan", acc: "Baik Sekali" },
+      { name: "Perencanaan Wilayah & Kota", acc: "Baik Sekali" },
+    ]},
+    { faculty: "Fakultas Ekonomi & Bisnis", programs: [
+      { name: "Manajemen", acc: "Unggul" },
+      { name: "Akuntansi", acc: "Unggul" },
+      { name: "Ekonomi Pembangunan", acc: "Baik Sekali" },
+    ]},
+    { faculty: "FISIP", programs: [
+      { name: "Ilmu Administrasi Publik", acc: "Unggul" },
+      { name: "Hubungan Internasional", acc: "Baik Sekali" },
+      { name: "Kesejahteraan Sosial", acc: "Unggul" },
+    ]},
+    { faculty: "Fakultas Hukum", programs: [
+      { name: "Ilmu Hukum", acc: "Unggul" },
+    ]},
+    { faculty: "FKIP", programs: [
+      { name: "Pendidikan Bahasa & Sastra Indonesia", acc: "Unggul" },
+      { name: "Pendidikan Matematika", acc: "Baik Sekali" },
+      { name: "Pendidikan Ekonomi", acc: "Unggul" },
+    ]},
+    { faculty: "FISS", programs: [
+      { name: "Sastra Indonesia", acc: "Baik Sekali" },
+      { name: "Sastra Inggris", acc: "Unggul" },
+      { name: "Sastra Jepang", acc: "Baik Sekali" },
+    ]},
+    { faculty: "Fakultas Kedokteran", programs: [
+      { name: "Kedokteran", acc: "Baik Sekali" },
+    ]},
+    { faculty: "Sekolah Pascasarjana", programs: [
+      { name: "Magister Manajemen", acc: "Unggul" },
+      { name: "Magister Ilmu Administrasi", acc: "Baik Sekali" },
+      { name: "Magister Hukum", acc: "Unggul" },
+    ]},
+  ];
+
+  return (
+    <div className="card shadow-sm rounded-3">
+      <div className="card-body">
+        <h5 style={{ fontWeight:700 }}>Akreditasi Seluruh Program Studi UNPAS</h5>
+        <div className="row g-3 mt-3">
+          {data.map((f) => (
+            <div key={f.faculty} className="col-12 mb-2">
+              <div style={{ fontWeight:700, color:"#4f46e5" }}>{f.faculty}</div>
+              <ul className="list-unstyled mb-2">
+                {f.programs.map((p) => (
+                  <li key={p.name} className="d-flex align-items-center justify-content-between py-1">
+                    <div className="d-flex align-items-center gap-2">
+                      <CheckCircle size={16} color={p.acc === 'Unggul' ? '#10b981' : '#f59e0b'} />
+                      <div>{p.name}</div>
+                    </div>
+                    <div className="small text-muted">{p.acc}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function PaymentSimulatorBootstrapFullWithIcons() {
   const [faculty, setFaculty] = useState(FACULTIES_FALLBACK[0].id);
   const [program, setProgram] = useState(FACULTIES_FALLBACK[0].programs[0]);
   const [path, setPath] = useState(JALUR[0].id);
@@ -135,16 +259,10 @@ export default function PaymentSimulatorBootstrapIcons() {
                   <h5 style={{ fontWeight:700 }}>Quick Look – Estimasimu</h5>
                   <div className="row g-3 mt-3">
                     <div className="col-6">
-                      <div className="p-3 rounded-3 card-indigo">
-                        <div className="small text-muted">Cicilan per bulan</div>
-                        <div style={{ fontWeight:800, color:"#4338ca" }}>{formatIDR(fees.monthly)}</div>
-                      </div>
+                      <SummaryTile label="Cicilan per bulan" value={fees.monthly} highlight="indigo" />
                     </div>
                     <div className="col-6">
-                      <div className="p-3 rounded-3 card-emerald">
-                        <div className="small text-muted">DP (uang muka)</div>
-                        <div style={{ fontWeight:800, color:"#059669" }}>{formatIDR(fees.firstPay)}</div>
-                      </div>
+                      <SummaryTile label="DP (uang muka)" value={fees.firstPay} highlight="green"/>
                     </div>
                     <div className="col-12">
                       <div className="p-3 rounded-3" style={{ background:"#fff7ed", border:"1px solid #fcd34d" }}>
@@ -181,7 +299,7 @@ export default function PaymentSimulatorBootstrapIcons() {
                 <div className="col-md-4">
                   <label className="form-label">Program Studi</label>
                   <select className="form-select" value={program} onChange={(e)=>setProgram(e.target.value)}>
-                    {(FACULTIES_FALLBACK.find(f=>f.id===faculty)?.programs ?? []).map(p=> <option key={p} value={p}>{p}</option>)}
+                    {programsForFaculty.map(p=> <option key={p} value={p}>{p}</option>)}
                   </select>
                 </div>
 
@@ -218,63 +336,31 @@ export default function PaymentSimulatorBootstrapIcons() {
                 <div className="col-md-6">
                   <label className="form-label">Biaya Tambahan</label>
                   <div className="d-flex flex-column gap-2">
-                    <div className="d-flex justify-content-between align-items-center border rounded-3 p-2">
-                      <div>Seragam & atribut</div>
-                      <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" checked={includeUniform} onChange={(e)=>setIncludeUniform(e.target.checked)}/>
-                      </div>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center border rounded-3 p-2">
-                      <div>Registrasi awal</div>
-                      <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" checked={includeRegFee} onChange={(e)=>setIncludeRegFee(e.target.checked)}/>
-                      </div>
-                    </div>
+                    <ToggleOption label="Seragam & atribut" checked={includeUniform} onChange={setIncludeUniform} />
+                    <ToggleOption label="Registrasi awal" checked={includeRegFee} onChange={setIncludeRegFee} />
                   </div>
                 </div>
               </div>
 
               <div className="row g-3 mt-4">
                 <div className="col-md-4">
-                  <div className="p-3 border rounded-3">
-                    <div className="small text-muted">SPP per semester</div>
-                    <div style={{ fontWeight:800 }}>{formatIDR(fees.spp)}</div>
-                  </div>
+                  <SummaryTile label="SPP per semester" value={fees.spp} />
+                </div>
+                <div className="col-md-4">
+                  <SummaryTile label="Uang Gedung" value={fees.ug} />
+                </div>
+                <div className="col-md-4">
+                  <SummaryTile label="Potongan Beasiswa" value={-fees.bea} />
                 </div>
 
                 <div className="col-md-4">
-                  <div className="p-3 border rounded-3">
-                    <div className="small text-muted">Uang Gedung</div>
-                    <div style={{ fontWeight:800 }}>{formatIDR(fees.ug)}</div>
-                  </div>
+                  <SummaryTile label="Sisa UG setelah DP" value={fees.ugAfterDp} />
                 </div>
-
                 <div className="col-md-4">
-                  <div className="p-3 border rounded-3">
-                    <div className="small text-muted">Potongan Beasiswa</div>
-                    <div style={{ fontWeight:800 }}>{formatIDR(-fees.bea)}</div>
-                  </div>
+                  <SummaryTile label="Cicilan/bulan" value={fees.monthly} highlight="indigo" />
                 </div>
-
                 <div className="col-md-4">
-                  <div className="p-3 border rounded-3">
-                    <div className="small text-muted">Sisa UG setelah DP</div>
-                    <div style={{ fontWeight:800 }}>{formatIDR(fees.ugAfterDp)}</div>
-                  </div>
-                </div>
-
-                <div className="col-md-4">
-                  <div className="p-3 border rounded-3 card-indigo">
-                    <div className="small text-muted">Cicilan/bulan</div>
-                    <div style={{ fontWeight:800, color:"#4338ca" }}>{formatIDR(fees.monthly)}</div>
-                  </div>
-                </div>
-
-                <div className="col-md-4">
-                  <div className="p-3 border rounded-3" style={{ background:"#fff7ed" }}>
-                    <div className="small text-muted">Total Tahun Pertama (perkiraan)</div>
-                    <div style={{ fontWeight:800, color:"#b45309" }}>{formatIDR(fees.totalYear)}</div>
-                  </div>
+                  <SummaryTile label="Total Tahun Pertama (perkiraan)" value={fees.totalYear} highlight="amber" />
                 </div>
               </div>
 
@@ -299,25 +385,7 @@ export default function PaymentSimulatorBootstrapIcons() {
         <div className="container">
           <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} transition={{ duration:0.6 }}>
             <h3 className="text-center mb-4" style={{ fontWeight:700, color:"#4f46e5" }}>Akreditasi Program Studi</h3>
-            <div className="row g-3">
-              {[
-                { name:"Teknik Industri", acc:"Unggul" },
-                { name:"Teknik Mesin", acc:"Baik Sekali" },
-                { name:"Teknik Informatika", acc:"Unggul" },
-                { name:"Manajemen", acc:"Unggul" },
-                { name:"Akuntansi", acc:"Unggul" },
-                { name:"Ilmu Hukum", acc:"Unggul" },
-              ].map((p, i)=>(
-                <div key={i} className="col-md-4">
-                  <div className="card shadow-sm rounded-3">
-                    <div className="card-body text-center">
-                      <div style={{ fontWeight:700, color:"#059669" }}>{p.name}</div>
-                      <span className={`badge ${p.acc==="Unggul" ? "bg-success" : "bg-warning text-dark"}`} style={{ marginTop:8, display:"inline-block" }}>Akreditasi {p.acc}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <AccreditationPanel />
           </motion.div>
         </div>
       </section>
