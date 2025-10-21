@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/simulasi_biaya/static/css/main.7223c5e4.css",
-    "main.js": "/simulasi_biaya/static/js/main.acfda5c3.js",
+    "main.js": "/simulasi_biaya/static/js/main.a47e4c74.js",
     "static/js/787.cda612ba.chunk.js": "/simulasi_biaya/static/js/787.cda612ba.chunk.js",
     "index.html": "/simulasi_biaya/index.html",
     "main.7223c5e4.css.map": "/simulasi_biaya/static/css/main.7223c5e4.css.map",
-    "main.acfda5c3.js.map": "/simulasi_biaya/static/js/main.acfda5c3.js.map",
+    "main.a47e4c74.js.map": "/simulasi_biaya/static/js/main.a47e4c74.js.map",
     "787.cda612ba.chunk.js.map": "/simulasi_biaya/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7223c5e4.css",
-    "static/js/main.acfda5c3.js"
+    "static/js/main.a47e4c74.js"
   ]
 }
