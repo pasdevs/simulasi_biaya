@@ -229,10 +229,10 @@ function PaymentSimulatorLandingBootstrap() {
             {[
               { prodi: "Teknik Informatika", akreditasi: "A" },
               { prodi: "Manajemen", akreditasi: "A" },
-              { prodi: "Akuntansi", akreditasi: "B" },
+              { prodi: "Akuntansi", akreditasi: "A" },
               { prodi: "Hukum", akreditasi: "A" },
               { prodi: "Ilmu Komunikasi", akreditasi: "A" },
-              { prodi: "Teknik Sipil", akreditasi: "B" },
+              { prodi: "Teknik Industri", akreditasi: "A" },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
