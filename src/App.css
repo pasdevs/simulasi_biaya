@@ -1,0 +1,15 @@
+.bg-indigo {
+  background-color: #4f46e5 !important; /* Tailwind Indigo-600 */
+}
+
+.text-indigo {
+  color: #4f46e5 !important;
+}
+
+.bg-emerald {
+  background-color: #10b981 !important; /* Tailwind Emerald-500 */
+}
+
+.text-emerald {
+  color: #10b981 !important;
+}

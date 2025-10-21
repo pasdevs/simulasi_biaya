@@ -1,0 +1,210 @@
+.App {
+  text-align: center;
+}
+
+/* body { */
+  /* background-color: #f8f9fa; */
+  /* CSS untuk menambahkan background image */
+    /* background-image: url('../public/bg30.png'); */
+    /* background-image: url('../public/bg1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; */
+    /* background-color: #d4e8ff; */
+/* } */
+
+.bg-video {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 93vh;
+  /* z-index:-100; */
+}
+
+.bg-video2 {
+  display: none;
+  position: fixed;
+  top: 0;
+  height: 100%;
+}
+
+.bg-image {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 93vh;
+  /* z-index:-100; */
+}
+
+.bg-image2 {
+  display: none;
+  position: fixed;
+  top: 0;
+  height: 100%;
+}
+
+.font-color-title{
+  color: white;
+}
+
+@media screen and (max-width: 480px) {
+  .bg-video {
+    display: none;
+  }
+  .bg-video2 {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .bg-image {
+    display: none;
+  }
+  .bg-image2 {
+    display: block;
+  }
+}
+
+/* Membuat footer selalu berada di bawah halaman */
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  /* background-color: #1833B8; */
+  /* background-color: #1A2D93; */
+  background-color: #040d3f;
+  color: white; /* Ganti dengan warna teks yang Anda inginkan */
+  text-align: center;
+  padding: 9px 0; /* Ruang di atas dan bawah teks dalam footer */
+}
+
+/* Gaya tautan sosial media */
+.sosial-media a {
+  font-size: 12px;
+  color: white; /* Warna teks tautan */
+  text-decoration: none; /* Menghilangkan garis bawah tautan */
+  margin-right: 10px; /* Ruang antara tautan */
+  /* display: flex; */
+  align-items: center;
+}
+
+.sosial-media a:hover{
+  color: rgb(255, 0, 0);
+}
+
+.website a {
+  font-size: 12px;
+  color: white;
+  text-decoration: none; 
+  /* margin-right: 10px;  */
+  /* display: flex; */
+  align-items: center;
+}
+
+.website a:hover{
+  color: rgb(255, 0, 0);
+}
+
+.table>:not(caption)>*>* {
+  padding: 1px 8px;
+}
+
+.container-fluid {
+  min-height: 93vh; /* Set tinggi minimal menjadi tinggi viewport */
+  position: relative;
+}
+
+
+
+/* css tambahan */
+/* Custom background with gradient */
+/* .custom-bg {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+} */
+
+/* Custom card style with gold elegant theme */
+.custom-card {
+  /* background: linear-gradient(135deg, #e8d09e, #b8926f); */
+  /* background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), #b8926f); */
+  /* background: linear-gradient(135deg, rgba(13,110,253,.25), #b8926f); */
+  background: linear-gradient(135deg, rgb(0 28 69 / 89%), #b8926f);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid #e8d09e; /* Border warna emas */
+  border-radius: 20px;
+  width: 350px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Shadow yang lebih dalam */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); /* Lebih besar saat hover */
+  transform: translateY(-5px); /* Efek floating saat hover */
+}
+
+/* Custom input style with gold theme */
+.custom-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  padding: 10px;
+  border-radius: 0;
+  outline: none;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.custom-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.custom-input:focus {
+  border-bottom-color: #fff;
+}
+
+.underline {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  transition: width 0.3s ease;
+  width: 0;
+}
+
+.custom-input:focus ~ .underline {
+  width: 80%;
+}
+
+/* Gold button style */
+.custom-btn {
+  background: linear-gradient(135deg, #f0c674, #d4a146); /* Gradasi emas */
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.custom-btn:hover {
+  background: linear-gradient(135deg, #d4a146, #f0c674); /* Tukar gradien saat hover */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Tambah shadow saat hover */
+  color: white;
+}
+
+/* Clear icon hover with gold theme */
+.clear-icon:hover {
+  color: red; /* Warna emas untuk icon clear */
+}
+
+.modal-content {
+  margin: auto;
+  width: auto;
+}
